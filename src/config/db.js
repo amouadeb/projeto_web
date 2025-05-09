@@ -1,4 +1,4 @@
-//conexção banco de dados
+// Conexão com o banco de dados
 
 const { Pool } = require('pg');
 require('dotenv').config();
@@ -13,6 +13,11 @@ const pool = new Pool({
   port: process.env.DB_PORT,
   ssl: isSSL ? { rejectUnauthorized: false } : false,
 });
+
+module.exports = {
+  query: (text, params) => pool.query(text, params),
+  connect: () => pool.connect(),
+};
 
 module.exports = {
   query: (text, params) => pool.query(text, params),
